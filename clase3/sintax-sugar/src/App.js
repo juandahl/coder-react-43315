@@ -24,9 +24,10 @@ const App = () => {
 
   function addStudent() {
     if (newStudent && newGrade) {
-      const student = {};
-      student.name = newStudent;
-      student.grade = newGrade;
+      const student = {
+        name: newStudent,
+        grade: newGrade,
+      }
 
       students.push(student);
 
@@ -46,25 +47,42 @@ const App = () => {
     setStudents(getSortStudents());
   };
 
-  function getStatus(student) {
-    if (student.grade > 7) {
-      return 'Aprobado';
-    } else {
-      return 'Desaprobado';
-    }
-  };
+  // function getStatus(student) {
+  //   return student.grade >= 7 ? 'Aprobado' : 'Desaprobado';
+  // };
+
+  const getStatus = (student) => (student.grade >= 7 ? 'Aprobado' : 'Desaprobado')
 
 
   // TODO: Retornar la cantidad de estudiantes aprobados
   const getCantidadAlumnosAprobados = () => {
+    let aprobados = 0;
+    students.forEach(student => {
+      aprobados = student.grade >= 7 ? aprobados + 1 : aprobados;
+    });
+
+    return aprobados;
   };
 
   // TODO: Retornar la cantidad de estudiantes desaprobados
   const getCantidadAlumnosDesaprobados = () => {
+    let desaprobados = 0;
+    students.forEach(student => {
+      if (student.grade < 7) {
+        desaprobados++;
+      }
+    });
+
+    return desaprobados;
   };
 
   // TODO: Buscar el estudiante con mayor nota
   const getBestStudent = () => {
+    const ordenados = getSortStudents();
+
+    const [best] = ordenados;
+
+    return best.name;
   };
 
   return (
@@ -79,7 +97,7 @@ const App = () => {
       </div>
       <ul className='list'>
         {students.map((student, index) => (
-          <li key={index}>
+          <li key={index} style={{ backgroundColor: student.grade >= 7 ? "#1BB88C" : "#D5380D" }}>
             <span>{student.name} - {student.grade} - {getStatus(student)}</span>
           </li>
         ))}
