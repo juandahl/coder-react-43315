@@ -16,6 +16,7 @@ const MIN_GRADE = 7;
 
 const App = () => {
   const [students, setStudents] = useState(defaultStudents);
+
   function addStudent(student) {
     if (student) {
       students.push(student);
