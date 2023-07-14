@@ -3,23 +3,26 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [capital, setCapital] = useState("No sabemos aún");
+  const [listaPokemons, setListaPokemons] = useState([]);
 
   useEffect(() => {
-    const url = "https://restcountries.com/v3.1/name/espa";
+    const url = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
     fetch(url, { method: 'GET' })
       .then(response => response.json())
-      .then(countries => {
-        const countryInfo = countries[0];
-        const capitalName = countryInfo.capital[0];
+      .then(pokemons => {
+        const result = pokemons.results;
 
-        setCapital(capitalName);
+        setListaPokemons(result);
       });
   }, []);
 
   return (
     <div className="App">
-      La capital es: {capital}
+      Pokemones: {listaPokemons.length}
+
+      {listaPokemons.map(pokemon => 
+        <div key={pokemon.name}>{pokemon.name}</div>
+      )}
     </div>
   );
 }
