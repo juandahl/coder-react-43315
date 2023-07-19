@@ -1,14 +1,17 @@
 import './App.css';
-import ButtonWithTitle from './components/buttonWithTitle';
-import ButtonWithTitleHOC from './components/buttonWithTitleHOC';
-import Input from './components/input';
+import Button from './components/button';
+import Input from "./components/input";
+import WithTitleChildren from './components/withTitleChildren';
 
 function App() {
   return (
     <div className="App">
-      <ButtonWithTitle />
-      <ButtonWithTitleHOC />
-      <Input />
+      <WithTitleChildren>
+        <Button />
+      </WithTitleChildren>
+      <WithTitleChildren>
+        <Input />
+      </WithTitleChildren>
     </div>
   );
 }
