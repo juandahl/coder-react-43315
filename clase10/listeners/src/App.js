@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import Input from './components/input';
 
 function App() {
   const [nombre, setNombre] = useState("");
@@ -20,23 +21,26 @@ function App() {
     console.log("handle click boton");
   }
 
-  function handleChange(event) {
-    const value = event.target.value;
-
+  function handleChange(value) {
     setNombre(value);
   }
 
-  function handleKeyDown(event) {
-    if (event.keyCode === 32) {
-      event.preventDefault();
-    }
+  function handleKeyDown(keyCode) {
+    console.log(keyCode);
+    //TODO: terminar
+    // const keys = [65, 69, 73, 79, 85];
+
+    // const exists = ;
+    // if () {
+    //   event.preventDefault();
+    // }
   }
 
   return (
     <div className="App" onClick={handleClickApp}>
-      {guardo && <div>{nombre}</div>}
+      <div>{nombre}</div>
 
-      <input onKeyDown={handleKeyDown} />
+      <Input onChange={handleChange} onKeyDown={handleKeyDown} />
       <button onClick={handleClick}>Guardar</button>
     </div>
   );
