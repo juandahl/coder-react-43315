@@ -1,0 +1,17 @@
+.layout {
+  text-align: center;
+  height: 100vh;
+}
+
+.button {
+  width: 200px;
+  height: 64px;
+  border-radius: 20px;
+}
+
+.text-light {
+  color: black;
+}
+.text-dark {
+  color: white;
+}
