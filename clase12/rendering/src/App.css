@@ -1,0 +1,34 @@
+.layout {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: 200px;
+  height: 64px;
+  border-radius: 20px;
+}
+
+.layout-dark {
+  background-color: black;
+}
+
+.text-light {
+  color: black;
+}
+.text-dark {
+  color: white;
+}
+
+.big-size {
+  font-size: 200px;
+}
+.color-red {
+  color: red;
+}
