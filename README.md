@@ -61,3 +61,12 @@ Generalmente son siempre los mismos pasos.
 
 Ejemplo de uso de botón dentro de App.js
 
+# Firebase
+
+## Instalación en React
+
+- npm install firebase
+- Luego, inicializa Firebase y comienza a usar los SDK de los productos que quieres utilizar.
+
+
+
