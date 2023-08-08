@@ -1,42 +1,23 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import useGetDocumentById from './hooks/useGetDocumentById';
 
 function App() {
-  const [student, setStudent] = useState(null);
+  // Estados
   const [students, setStudents] = useState([]);
 
-  // Devuelve un estudiante por id
-  useEffect(() => {
-    const db = getFirestore();
-
-    const studentRef = doc(db, "students", "ykIuZpMwNiziXZvgXgR4");
-    getDoc(studentRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data();
-        // const estudiante = {
-        //   id: snapshot.id,
-        //   ...data,
-        // };
-        const estudiante = {
-          id: snapshot.id,
-          firstName: data.firstName,
-          lastName: data.lastName
-        };
-
-        setStudent(estudiante);
-      }
-    })
-
-  }, []);
+  // Hooks
+  const { document: student } = useGetDocumentById("students", "ykIuZpMwNiziXZvgXgR4");
+  const { document: firstOrder } = useGetDocumentById("orders", "oXFf0ACV6ijMopq1Zoby");
+  console.log(firstOrder);
 
   // Devolver todos los estudiantes
   useEffect(() => {
     const db = getFirestore();
 
     const studentCollection = collection(db, "students");
-    const conditionEdad = where("age", "<", 25);
     const conditionNombre = where("lastName", "==", "Dahl");
 
     const q = query(studentCollection, conditionNombre);
@@ -57,13 +38,15 @@ function App() {
 
   }, []);
 
-  if (!student) {
+  if (!student || !firstOrder) {
     return <div>loading...</div>;
   }
 
   return (
     <div className="App">
       {student.firstName} {student.lastName}
+
+      {firstOrder.buyer.email}
 
       <div>Cantidad de estudiantes: {students.length}</div>
     </div>
