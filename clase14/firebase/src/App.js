@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { addDoc, doc, updateDoc, collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import useGetDocumentById from './hooks/useGetDocumentById';
 
 function App() {
@@ -11,16 +11,14 @@ function App() {
   // Hooks
   const { document: student } = useGetDocumentById("students", "ykIuZpMwNiziXZvgXgR4");
   const { document: firstOrder } = useGetDocumentById("orders", "oXFf0ACV6ijMopq1Zoby");
-  console.log(firstOrder);
 
   // Devolver todos los estudiantes
   useEffect(() => {
     const db = getFirestore();
 
     const studentCollection = collection(db, "students");
-    const conditionNombre = where("lastName", "==", "Dahl");
 
-    const q = query(studentCollection, conditionNombre);
+    const q = query(studentCollection);
 
     getDocs(q).then((snapshot) => {
       console.log("entra al then");
@@ -38,6 +36,27 @@ function App() {
 
   }, []);
 
+  function addStudent() {
+    const newStudent = {
+      firstName: "Nombre",
+      lastName: "Apellido",
+      age: 38
+    }
+
+    const db = getFirestore();
+    const collectionRef = collection(db, "students");
+
+    addDoc(collectionRef, newStudent).then((doc) => console.log(doc));
+  }
+
+  function updateStudent() {
+    const db = getFirestore();
+
+    const studentRef = doc(db, "students", "ykIuZpMwNiziXZvgXgR4");
+
+    updateDoc(studentRef, { firstName: "Juan" }).then((doc) => console.log(doc));
+  }
+
   if (!student || !firstOrder) {
     return <div>loading...</div>;
   }
@@ -46,9 +65,10 @@ function App() {
     <div className="App">
       {student.firstName} {student.lastName}
 
-      {firstOrder.buyer.email}
-
       <div>Cantidad de estudiantes: {students.length}</div>
+
+      <button onClick={addStudent}>Agregar estudiante</button>
+      <button onClick={updateStudent}>Actualizar estudiante</button>
     </div>
   );
 }
