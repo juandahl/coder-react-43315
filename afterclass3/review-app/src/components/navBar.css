@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px 0px;
+}
+
+.active {
+  color: red;
+  text-decoration: underline;
+}
+
+.not-active {
+  text-decoration: none;
+}
