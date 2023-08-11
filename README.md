@@ -4,7 +4,7 @@ Repositorio en donde encontraras el código de cada ejercio visto en clase junto
 
 ## Instalar Node JS
 
-Ve al sitio web oficial de Node.js (https://nodejs.org) y descarga la versión LTS (Long-Term Support).
+Ve al sitio web oficial de Node.js [link](https://nodejs.org) y descarga la versión LTS (Long-Term Support).
 Elige la versión adecuada para tu sistema operativo (Windows, macOS o Linux) y descárgala.
 Ejecuta el instalador descargado y sigue las instrucciones del asistente de instalación.
 Asegúrate de marcar la opción "Agregar Node.js al PATH" durante la instalación para poder acceder a Node.js desde la línea de comandos.
@@ -67,6 +67,26 @@ Ejemplo de uso de botón dentro de App.js
 
 - npm install firebase
 - Luego, inicializa Firebase y comienza a usar los SDK de los productos que quieres utilizar.
+- Importa el json de configuración e instancia en index.js
 
+```
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "firebase/app";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "XXXXXXXXXXXX",
+      authDomain: "coderhouse-ecommerce-e6aa4.firebaseapp.com",
+      projectId: "coderhouse-ecommerce-e6aa4",
+      storageBucket: "coderhouse-ecommerce-e6aa4.appspot.com",
+      messagingSenderId: "266512348273",
+      appId: "XXXXXXXXXXXXX"
+    };
+
+    // Initialize Firebase
+    initializeApp(firebaseConfig);
+
+```
 
